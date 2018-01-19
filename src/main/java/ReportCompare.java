@@ -12,8 +12,7 @@ public class ReportCompare {
         int i=0;
 
         CSV_Compare comoarator = new CSV_Compare();
-        comoarator.compareCSV(new File("E:\\AutoTests\\Temp\\ReportCompare\\Vertica_Redshift_apply.csv"), new File("E:\\AutoTests\\Temp\\ReportCompare\\Vertica_Redshift_apply.csv"));
-
+ 
 
     }
 }
