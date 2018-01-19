@@ -9,8 +9,8 @@
         <module name="ReportCompare" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="ReportCompare" target="1.5" />
+    <bytecodeTargetLevel target="1.8">
+      <module name="ReportCompare" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

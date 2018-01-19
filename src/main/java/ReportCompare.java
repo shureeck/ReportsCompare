@@ -8,8 +8,11 @@ public class ReportCompare {
     public static void main(String[] args){
         ArrayList <File> test = new ArrayList<File>(ReportsList.getReportsList(new File("e:\\AutoTests\\Temp\\ReportCompare\\")));
 
-        ArrayList<String> report = new ArrayList<String>(ReportReader.Readfile(new File("E:\\AutoTests\\Temp\\ReportCompare\\Vertica_Redshift_apply.csv")));
+        ArrayList<String> report = new ArrayList<String>(ReportReader.readFile(new File("E:\\AutoTests\\Temp\\ReportCompare\\Vertica_Redshift_apply.csv")));
         int i=0;
+
+        CSV_Compare comoarator = new CSV_Compare();
+        comoarator.compareCSV(new File("E:\\AutoTests\\Temp\\ReportCompare\\Vertica_Redshift_apply.csv"), new File("E:\\AutoTests\\Temp\\ReportCompare\\Vertica_Redshift_apply.csv"));
 
 
     }

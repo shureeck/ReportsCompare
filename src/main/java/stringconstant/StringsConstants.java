@@ -12,6 +12,7 @@ public class StringsConstants {
     public static final String TIME_FORMAT = "HH:mm:ss";
 
     public static final String CSV =".csv";
+    public static final String STATISTIC_BY_SOURCE_XML = "Statistic by source.xml";
 
 
 }

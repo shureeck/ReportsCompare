@@ -7,7 +7,7 @@ import static stringconstant.LoggerMessages.*;
  * Created by Poliakov.A on 1/18/2018.
  */
 public class ReportReader {
-    public static ArrayList<String> Readfile(File file){
+    public static ArrayList<String> readFile(File file){
         ArrayList<String> report = new ArrayList<String>();
 
         FileReader scaner=null;
