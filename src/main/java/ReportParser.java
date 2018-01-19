@@ -13,10 +13,10 @@ public class ReportParser {
         int swch=0;
 
         while(true){
-            if (swch==1 && !report.get(i).trim().equalsIgnoreCase("")){
+            if (swch==1 && !report.get(i).trim().equalsIgnoreCase(EMPTY)){
                 statisticBySource.add(report.get(i));
             }
-            else if (swch==1 && report.get(i).trim().equalsIgnoreCase("")){
+            else if (swch==1 && report.get(i).trim().equalsIgnoreCase(EMPTY)){
                 break;
             }
 
