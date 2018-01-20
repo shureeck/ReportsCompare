@@ -19,14 +19,16 @@ public class CSV_Compare {
 
     public void compareReport(ArrayList<String> report, ArrayList<String>reference){
         int i=0;
+        int count =0;
         while (report.size()>i){
             if (reference.stream().noneMatch((p)->p.equalsIgnoreCase(report.get(0))))
             {
                //will be changed to report or buffer
-                Logger.setLog(reference.get(i));
+                Logger.setReport(reference.get(i));
+                count++;
             }
-
             i++;
+
         }
     }//compareReport
 }

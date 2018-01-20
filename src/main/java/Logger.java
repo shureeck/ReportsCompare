@@ -50,4 +50,37 @@ public class Logger {
             }
         }//finally
     }
+
+    public static void setReport(String msg){
+               File report = new File( REPORT_CSV);
+
+        //Create new file if not exist
+        try {
+            if (!report.exists()) {
+                report.createNewFile();
+            }
+        }
+        catch (IOException e){
+            e.printStackTrace();
+        }
+
+        //Write data in .log file
+        BufferedWriter writer=null;
+        try {
+            writer =new BufferedWriter(new FileWriter(report, true));
+            writer.write(msg+'\n');
+        }//try
+        catch (IOException e){
+            e.printStackTrace();
+        }//catch
+        finally {
+            try {
+                writer.close();
+            }
+            catch (IOException e){
+                e.printStackTrace();
+            }
+        }//finally
+    }
+
 }

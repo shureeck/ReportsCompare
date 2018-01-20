@@ -29,4 +29,13 @@ public class ReportParser {
 
         return statisticBySource;
     }
+
+    public static String getBuildNumber(ArrayList<String> report){
+        String buildNumber=null;
+
+        buildNumber = report.stream().filter((p)->p.matches(BUILD_NUMBER)).findFirst().get().toString();
+        buildNumber=buildNumber.substring(buildNumber.indexOf(COMA)+1).trim();
+
+        return buildNumber;
+    }
 }
