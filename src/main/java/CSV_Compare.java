@@ -1,27 +1,28 @@
-import java.io.File;
 import java.util.ArrayList;
-
-import static stringconstant.StringsConstants.*;
 
 /**
  * Created by Poliakov.A on 1/19/2018.
  */
 public class CSV_Compare {
 
-    public void compareStatisticBySource(ArrayList<String> report, ArrayList<String>reference){
+    public int compareStatisticBySource(ArrayList<String> report, ArrayList<String>reference, String statisticType){
         //Get collections with statistic y source
-        ArrayList<String>tempReport = new ArrayList<>(ReportParser.getStatisticBySource(report));
-        ArrayList<String>tempReference = new ArrayList<>(ReportParser.getStatisticBySource(reference));
+        ArrayList<String>tempReport = new ArrayList<>(ReportParser.getStatistic(report, statisticType ));
+        ArrayList<String>tempReference = new ArrayList<>(ReportParser.getStatistic(reference, statisticType));
 
         //Compare statistic
-        compareReport(tempReport,tempReference);
+        int result = compareReport(tempReport,tempReference);
+
+        return result;
     }// compareStatisticBySource
 
-    public void compareReport(ArrayList<String> report, ArrayList<String>reference){
+
+    private int compareReport(ArrayList<String> report, ArrayList<String>reference){
         int i=0;
         int count =0;
         while (report.size()>i){
-            if (reference.stream().noneMatch((p)->p.equalsIgnoreCase(report.get(0))))
+            String temp = report.get(i);
+            if (reference.stream().noneMatch((p)->p.equalsIgnoreCase(temp)))
             {
                //will be changed to report or buffer
                 Logger.setReport(reference.get(i));
@@ -30,5 +31,6 @@ public class CSV_Compare {
             i++;
 
         }
+        return count;
     }//compareReport
 }

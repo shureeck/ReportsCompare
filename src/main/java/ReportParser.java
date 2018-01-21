@@ -6,29 +6,28 @@ import static stringconstant.StringsConstants.*;
  * Created by Poliakov.A on 1/19/2018.
  */
 public class ReportParser {
-    public static ArrayList<String> getStatisticBySource(ArrayList<String> report){
-        ArrayList<String> statisticBySource = new ArrayList<>(null);
+    public static ArrayList<String> getStatistic(ArrayList<String> report, String statisticType){
+        ArrayList<String> statistic = new ArrayList<>();
 
         int i=0;
         int swch=0;
 
-        while(true){
+        while(report.size()>i){
             if (swch==1 && !report.get(i).trim().equalsIgnoreCase(EMPTY)){
-                statisticBySource.add(report.get(i));
+                statistic.add(report.get(i));
             }
             else if (swch==1 && report.get(i).trim().equalsIgnoreCase(EMPTY)){
                 break;
             }
 
-            if (report.get(i).equalsIgnoreCase(STATISTIC_BY_SOURCE_XML)){
+            if (report.get(i).trim().equalsIgnoreCase(statisticType)){
                 swch =1;
-                i++;
             }
             i++;
         }
+        return statistic;
+    }// getStatistic
 
-        return statisticBySource;
-    }
 
     public static String getBuildNumber(ArrayList<String> report){
         String buildNumber=null;
@@ -38,4 +37,4 @@ public class ReportParser {
 
         return buildNumber;
     }
-}
+}//getBuildNumber
