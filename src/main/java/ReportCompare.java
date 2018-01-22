@@ -12,8 +12,12 @@ public class ReportCompare {
       //  ArrayList <File> test = new ArrayList<File>(ReportsList.getReportsList(new File("e:\\AutoTests\\Temp\\ReportCompare\\")));
 //"E:\\AutoTests\\Temp\\ReportCompare\\Vertica_Redshift_apply.csv"
 
-        File reportFile =new File("E:\\ReportExamples\\Reports\\Oracle-PostgreSQL\\Oracle_WriteToDB.csv");
-        File referenceFile = new File("E:\\ReportExamples\\Reference\\Oracle-PostgreSQL\\Oracle_WriteToDB.csv");
+       File reportFile =new File("E:\\ReportExamples\\Reports\\Oracle-PostgreSQL\\Oracle_WriteToDB.csv");
+       File referenceFile = new File("E:\\ReportExamples\\Reference\\Oracle-PostgreSQL\\Oracle_WriteToDB.csv");
+
+       // File reportFile =new File("E:\\AutoTests\\Reports\\Main2211\\reports\\DB2_MySQL\\DB2_MySQL_ReportTest.csv");
+       // File referenceFile = new File("E:\\AutoTests\\Reports\\Main2136\\reports\\DB2_MySQL\\DB2_MySQL_ReportTest.csv");
+
 
         ArrayList<String> report = new ArrayList<String>(ReportReader.readFile(reportFile));
         ArrayList<String> reference = new ArrayList<String>(ReportReader.readFile(referenceFile));
@@ -22,37 +26,30 @@ public class ReportCompare {
         String reportBuildNumber = ReportParser.getBuildNumber(report).trim();
         String referenceBuilNumber = ReportParser.getBuildNumber((reference));
 
-        Logger.setReport(REFERENCE_BUILD+referenceBuilNumber+"\n"+CURRENT_BUILD+reportBuildNumber+"\n\n");
+        Logger.setReport(REFERENCE_BUILD+referenceBuilNumber+"\n"+CURRENT_BUILD+reportBuildNumber+"\n");
 
-        //compare statistic by source
-
+        //Reports Compare
+        Logger.setReport(MARKER+reportFile.getName());
         CSV_Compare csv_compare = new CSV_Compare();
 
-        if (reportFile.getName().toLowerCase().contains(APPLY) || reportFile.getName().toLowerCase().contains(WRITE)){
-            Logger.setReport(STATISTIC_BY_SOURCE_XML);
-            int result = csv_compare.compareStatisticBySource(report,reference,STATISTIC_BY_SOURCE_XML);
-
-            if (result==0){
-                Logger.setReport(NO_CHANGES);
-            }
-
-            Logger.setReport(GENERAL_STATISTIC);
-             result = csv_compare.compareStatisticBySource(report,reference,GENERAL_STATISTIC);
-            if (result==0){
-                Logger.setReport(NO_CHANGES);
-            }
-
-            Logger.setReport(BY_CATEGORIES);
-            result = csv_compare.compareStatisticBySource(report,reference,STATISTIC_BY_CATEGORIES);
-            if (result==0){
-                Logger.setReport(NO_CHANGES);
-            }
-            else {
-                result =csv_compare.compareStatisticBySource(report,reference,GET_OBJECTS);
-
-            }
-
-    //    CSV_Compare comoarator = new CSV_Compare();
+        if (report.stream().anyMatch((p)->p.trim().equalsIgnoreCase(APPLY))){
+            csv_compare.compareApplyReports(report,reference);
         }
+
+        else if (report.stream().anyMatch((p)->p.trim().equalsIgnoreCase(CONVERSION))){
+            csv_compare.compareConversionReports(report,reference);
+        }
+
+        else if (report.stream().anyMatch((p)->p.trim().equalsIgnoreCase(AI) || p.equalsIgnoreCase(ACTION_ITEMS))){
+            csv_compare.compareErrorReports(report,reference);
+        }
+
+        else if (report.stream().anyMatch((p)->p.trim().equalsIgnoreCase(ERROR))){
+            csv_compare.compareAIReports(report,reference);
+        }
+        else {
+            Logger.setReport(COULD_NOT_IDENTIFY_REPORT_TYPE);
+        }
+
     }
 }

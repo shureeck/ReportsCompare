@@ -9,9 +9,12 @@ public class StringsConstants {
     public static final String COLON = ": ";
     public static final String COMA = ",";
     public static final String REPORT_CSV ="Report.csv";
-    public static final String APPLY = "apply";
-    public static final String WRITE = "write";
 
+    public static final String APPLY = "APPLY VERIFICATION FILE";
+    public static final String CONVERSION = "CONVERSION VERIFICATION FILE";
+    public static final String AI ="AI VERIFICATION FILE";
+    public static final String ACTION_ITEMS = "ACTION ITEMS VERIFICATION FILE";
+    public static final String ERROR ="ERROR VERIFICATION FILE";
     public static final String DATE_FORMAT = "y-M-d";
     public static final String TIME_FORMAT = "HH:mm:ss";
 
