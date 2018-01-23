@@ -9,4 +9,5 @@ public class ReportMessages {
     public static final String COULD_NOT_IDENTIFY_REPORT_TYPE ="Could not identify report type";
 
     public static final String MARKER =">>";
+    public static final String SEPARATOR = "---------------------------------------------------------------------------------------------------------------------------------------------";
 }
