@@ -1,5 +1,8 @@
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.function.Supplier;
+import java.util.stream.Collectors;
 
 import  static stringconstant.ReportMessages.*;
 import  static stringconstant.StringsConstants.*;
@@ -10,7 +13,15 @@ import  static stringconstant.StringsConstants.*;
 public class ReportCompare {
     public static void main(String[] args){
       //  ArrayList <File> test = new ArrayList<File>(ReportsList.getReportsList(new File("e:\\AutoTests\\Temp\\ReportCompare\\")));
-//"E:\\AutoTests\\Temp\\ReportCompare\\Vertica_Redshift_apply.csv"
+//"E:\\AutoTests\\Temp\\ReportCompare\\Vertica_Redshift_apply.csv",
+
+        String reportsPath="e:\\AutoTests\\Reports\\Main2197\\reports\\";
+        String referencePath="e:\\AutoTests\\Reports\\Main2197\\reports\\";
+
+        ArrayList <File> reportsList = new ArrayList<>(ReportsList.getReportsList(new File(reportsPath)));
+        ArrayList <File> referenceList = new ArrayList<>(ReportsList.getReportsList(new File(referencePath)));
+
+        ArrayList<File> reportsByPair = ReportsList.getReportsForPair(referenceList);
 
        File reportFile =new File("E:\\ReportExamples\\Reports\\Oracle-PostgreSQL\\Oracle_WriteToDB.csv");
        File referenceFile = new File("E:\\ReportExamples\\Reference\\Oracle-PostgreSQL\\Oracle_WriteToDB.csv");

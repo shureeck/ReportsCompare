@@ -1,5 +1,6 @@
 import java.io.File;
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 import static stringconstant.StringsConstants.*;
 import static stringconstant.LoggerMessages.*;
@@ -30,5 +31,20 @@ public class ReportsList {
             i++;
         }
         return csvFilesList;
+    }
+
+    public static ArrayList<File> getReportsForPair(ArrayList<File>reportsList){
+        String parentReport = reportsList.get(0).getParentFile().getName();
+
+        ArrayList<File>  reportsByPair = new ArrayList<>();
+        reportsByPair.addAll(reportsList.stream().filter((p)->p.getParentFile().getName().equalsIgnoreCase(parentReport)).collect(Collectors.toCollection(ArrayList<File>::new)));
+
+        int i =0;
+        while(reportsByPair.size()>i){
+            String path = reportsByPair.get(i).getPath();
+            reportsList.removeIf((p)->p.getPath().equalsIgnoreCase(path));
+            i++;
+        }
+        return reportsByPair;
     }
 }
