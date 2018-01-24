@@ -12,6 +12,7 @@ public class ReportCompare {
 
         String reportsPath="e:\\AutoTests\\Reports\\DEV3532\\reports\\";
         String referencePath="e:\\AutoTests\\Reports\\Main2211\\reports\\";
+        int numberFailed = 5;
 
         ArrayList <File> reportsList = new ArrayList<>(ReportsList.getReportsList(new File(reportsPath)));
         ArrayList <File> referenceList = new ArrayList<>(ReportsList.getReportsList(new File(referencePath)));
@@ -49,7 +50,7 @@ public class ReportCompare {
                 File reportFile = reportsByPair.get(i);
 
                 if (referenceFile!=null &&reportFile!=null) {
-                    csv_compare.csvCompare(reportFile, referenceFile);
+                    csv_compare.csvCompare(reportFile, referenceFile, numberFailed);
                     referenceList.removeIf((p) -> p.getPath().endsWith(path));
                 }
                 else {
