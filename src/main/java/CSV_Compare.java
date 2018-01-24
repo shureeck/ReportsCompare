@@ -1,3 +1,4 @@
+import java.io.File;
 import java.util.ArrayList;
 
 import static stringconstant.StringsConstants.*;
@@ -18,7 +19,6 @@ public class CSV_Compare {
         return result;
     }// compareStatisticBySource
 
-
     private int compareReport(ArrayList<String> report, ArrayList<String>reference){
         int i=0;
         int count =0;
@@ -27,7 +27,7 @@ public class CSV_Compare {
             if (reference.stream().noneMatch((p)->p.equalsIgnoreCase(temp)))
             {
                //will be changed to report or buffer
-                Logger.setReport(report.get(i));
+                Logger.setReport("\n"+report.get(i));
                 count++;
             }
             i++;
@@ -39,28 +39,28 @@ public class CSV_Compare {
     public void compareApplyReports (ArrayList<String> report, ArrayList<String> reference){
         int result;
         //Get statistic by source
-        Logger.setReport(STATISTIC_BY_SOURCE_XML);
+        Logger.setReport(MARKER_2+STATISTIC_BY_SOURCE_XML);
         result = compareStatisticBySource(report,reference,STATISTIC_BY_SOURCE_XML);
         if (result==0){
-            Logger.setReport(NO_CHANGES);
+            Logger.setReport(NO_CHANGES+"\n");
         }
         //Get general statistic
-        Logger.setReport(GENERAL_STATISTIC);
+        Logger.setReport(MARKER_2+GENERAL_STATISTIC);
         result = compareStatisticBySource(report,reference,GENERAL_STATISTIC);
         if (result==0){
-            Logger.setReport(NO_CHANGES);
+            Logger.setReport(NO_CHANGES+"\n");
         }
         //Get statistic by categories
-        Logger.setReport(BY_CATEGORIES);
+        Logger.setReport(MARKER_2+BY_CATEGORIES);
         result = compareStatisticBySource(report,reference,STATISTIC_BY_CATEGORIES);
         if (result==0){
-            Logger.setReport(NO_CHANGES);
+            Logger.setReport(NO_CHANGES+"\n");
         }
         else {
             result=compareStatisticBySource(report,reference,GET_OBJECTS);
             if (result==0){
-                Logger.setReport(NO_DIFFERENCE_OBJECT_STATUS);
-                Logger.setReport(MANUAL_ANALYS_NECESSARY);
+                Logger.setReport("\n"+NO_DIFFERENCE_OBJECT_STATUS);
+                Logger.setReport("\n"+MANUAL_ANALYS_NECESSARY);
             }
         }
     }//compareApplyReports
@@ -68,22 +68,22 @@ public class CSV_Compare {
     public void compareConversionReports (ArrayList<String> report, ArrayList<String> reference){
         int result;
 
-        Logger.setReport(GENERAL_STATISTIC);
+        Logger.setReport(MARKER_2+GENERAL_STATISTIC);
         result = compareStatisticBySource(report,reference,GENERAL_STATISTIC);
         if (result==0){
-            Logger.setReport(NO_CHANGES);
+            Logger.setReport(NO_CHANGES+"\n");
         }
 
-        Logger.setReport(BY_CATEGORIES);
+        Logger.setReport(MARKER_2+BY_CATEGORIES);
         result = compareStatisticBySource(report,reference,STATISTIC_BY_CATEGORIES);
         if (result==0){
-            Logger.setReport(NO_CHANGES);
+            Logger.setReport(NO_CHANGES+"\n");
         }
         else {
             result=compareStatisticBySource(report,reference,GET_OBJECTS);
             if (result==0){
-                Logger.setReport(NO_DIFFERENCE_OBJECT_STATUS);
-                Logger.setReport(MANUAL_ANALYS_NECESSARY);
+                Logger.setReport("\n"+NO_DIFFERENCE_OBJECT_STATUS);
+                Logger.setReport("\n"+MANUAL_ANALYS_NECESSARY);
             }
         }
     }//compareConversionReports
@@ -91,16 +91,16 @@ public class CSV_Compare {
     public void compareErrorReports (ArrayList<String> report, ArrayList<String> reference){
         int result;
         //Get statistic by categories
-        Logger.setReport(BY_CATEGORIES);
+        Logger.setReport(MARKER_2+BY_CATEGORIES);
         result = compareStatisticBySource(report,reference,STATISTIC_BY_CATEGORIES);
         if (result==0){
-            Logger.setReport(NO_CHANGES);
+            Logger.setReport(NO_CHANGES+"\n");
         }
         else {
             result=compareStatisticBySource(report,reference,GET_OBJECTS);
             if (result==0){
-                Logger.setReport(NO_DIFFERENCE_OBJECT_STATUS);
-                Logger.setReport(MANUAL_ANALYS_NECESSARY);
+                Logger.setReport("\n"+NO_DIFFERENCE_OBJECT_STATUS);
+                Logger.setReport("\n"+MANUAL_ANALYS_NECESSARY);
             }
         }
     }//compareErrorReports
@@ -108,17 +108,46 @@ public class CSV_Compare {
     public void compareAIReports (ArrayList<String> report, ArrayList<String> reference){
         int result;
 //Get general statistic;
-        Logger.setReport(GENERAL_STATISTIC);
+        Logger.setReport(MARKER_2+GENERAL_STATISTIC);
         result = compareStatisticBySource(report,reference,GENERAL_STATISTIC);
         if (result==0){
-            Logger.setReport(NO_CHANGES);
+            Logger.setReport(NO_CHANGES+"\n");
         }
         else {
             result=compareStatisticBySource(report,reference,GET_OBJECTS);
             if (result==0){
-                Logger.setReport(NO_DIFFERENCE_OBJECT_STATUS);
-                Logger.setReport(MANUAL_ANALYS_NECESSARY);
+                Logger.setReport("\n"+NO_DIFFERENCE_OBJECT_STATUS);
+                Logger.setReport("\n"+MANUAL_ANALYS_NECESSARY);
             }
         }
     }//compareAIReports
+
+    public void csvCompare(File reportFile, File referenceFile){
+
+
+        ArrayList<String> report = new ArrayList<String>(ReportReader.readFile(reportFile));
+        ArrayList<String> reference = new ArrayList<String>(ReportReader.readFile(referenceFile));
+
+        Logger.setReport(MARKER+reportFile.getName()+"\n");
+
+        if (report.stream().anyMatch((p)->p.trim().equalsIgnoreCase(APPLY))){
+             compareApplyReports(report,reference);
+        }
+
+        else if (report.stream().anyMatch((p)->p.trim().equalsIgnoreCase(CONVERSION))){
+            compareConversionReports(report,reference);
+        }
+
+        else if (report.stream().anyMatch((p)->p.trim().equalsIgnoreCase(AI) || p.equalsIgnoreCase(ACTION_ITEMS))){
+           compareErrorReports(report,reference);
+        }
+
+        else if (report.stream().anyMatch((p)->p.trim().equalsIgnoreCase(ERROR))){
+            compareAIReports(report,reference);
+        }
+        else {
+            Logger.setReport(COULD_NOT_IDENTIFY_REPORT_TYPE+"\n");
+        }
+    }//csvCompare
+
 }

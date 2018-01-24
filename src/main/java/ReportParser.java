@@ -1,6 +1,12 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 
 import static stringconstant.StringsConstants.*;
+import static stringconstant.LoggerMessages.*;
 
 /**
  * Created by Poliakov.A on 1/19/2018.
@@ -29,12 +35,21 @@ public class ReportParser {
     }// getStatistic
 
 
-    public static String getBuildNumber(ArrayList<String> report){
+    public static String getBuildNumber(File report){
         String buildNumber=null;
 
-        buildNumber = report.stream().filter((p)->p.matches(BUILD_NUMBER)).findFirst().get().toString();
-        buildNumber=buildNumber.substring(buildNumber.indexOf(COMA)+1).trim();
+        try {
+            buildNumber = Files.lines(Paths.get(report.toURI())).filter((p)->p.matches(BUILD_NUMBER)).findFirst().orElse(null);
+        } catch (FileNotFoundException e){
+            Logger.setLog(FILE_NOT_FOUND+e.getMessage());
 
+        } catch (IOException e) {
+            Logger.setLog(IO_ERROR_GET_BUILD_NAMBER);
+            e.printStackTrace();
+        }
+        if (buildNumber!=null) {
+            buildNumber = buildNumber.substring(buildNumber.indexOf(COMA) + 1).trim();
+        }
         return buildNumber;
     }
 }//getBuildNumber
