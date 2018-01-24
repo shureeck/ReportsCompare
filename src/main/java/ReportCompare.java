@@ -10,8 +10,8 @@ public class ReportCompare {
     public void reportCompare(){
 
 
-        String reportsPath="e:\\AutoTests\\Reports\\Main2206\\reports\\";
-        String referencePath="e:\\AutoTests\\Reports\\Main2197\\reports\\";
+        String reportsPath="e:\\AutoTests\\Reports\\DEV3532\\reports\\";
+        String referencePath="e:\\AutoTests\\Reports\\Main2211\\reports\\";
 
         ArrayList <File> reportsList = new ArrayList<>(ReportsList.getReportsList(new File(reportsPath)));
         ArrayList <File> referenceList = new ArrayList<>(ReportsList.getReportsList(new File(referencePath)));
@@ -23,13 +23,13 @@ public class ReportCompare {
             buildNumber = ReportParser.getBuildNumber(referenceList.get(i));
             if (buildNumber!=null) break;
         }
-        Logger.setReport(REFERENCE_BUILD+buildNumber+"\n");
+        Logger.setReport(REFERENCE_BUILD+buildNumber);
 
         while(i<reportsList.size()) {
             buildNumber = ReportParser.getBuildNumber(reportsList.get(i));
             if (buildNumber!=null) break;
         }
-        Logger.setReport(CURRENT_BUILD+buildNumber+"\n\n");
+        Logger.setReport(CURRENT_BUILD+buildNumber+"\n");
 
         //Report compare
         CSV_Compare csv_compare = new CSV_Compare();
@@ -37,7 +37,7 @@ public class ReportCompare {
         while(reportsList.size()!=0) {
             ArrayList<File> reportsByPair = ReportsList.getReportsForPair(reportsList);//getReportsForPair get always item[0]
 
-            Logger.setReport(reportsByPair.get(0).getParentFile().getPath()+"\n");
+            Logger.setReport(reportsByPair.get(0).getParentFile().getPath());
 
             i = 0;
             while (i < reportsByPair.size()) {
@@ -53,11 +53,11 @@ public class ReportCompare {
                     referenceList.removeIf((p) -> p.getPath().endsWith(path));
                 }
                 else {
-                    Logger.setReport(FILE_WAS_NOT_FOUND+path+"\n");
+                    Logger.setReport(FILE_WAS_NOT_FOUND+path);
                 }
                 i++;
             }
-            Logger.setReport(SEPARATOR+"\n");
+            Logger.setReport(SEPARATOR);
         }//while
 
     }

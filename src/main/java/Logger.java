@@ -68,7 +68,7 @@ public class Logger {
         BufferedWriter writer=null;
         try {
             writer =new BufferedWriter(new FileWriter(report, true));
-            writer.write(msg);
+            writer.write(msg+"\n");
         }//try
         catch (IOException e){
             e.printStackTrace();

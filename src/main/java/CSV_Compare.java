@@ -27,11 +27,10 @@ public class CSV_Compare {
             if (reference.stream().noneMatch((p)->p.equalsIgnoreCase(temp)))
             {
                //will be changed to report or buffer
-                Logger.setReport("\n"+report.get(i));
+                Logger.setReport(report.get(i));
                 count++;
             }
             i++;
-
         }
         return count;
     }//compareReport
@@ -42,25 +41,25 @@ public class CSV_Compare {
         Logger.setReport(MARKER_2+STATISTIC_BY_SOURCE_XML);
         result = compareStatisticBySource(report,reference,STATISTIC_BY_SOURCE_XML);
         if (result==0){
-            Logger.setReport(NO_CHANGES+"\n");
+            Logger.setReport(NO_CHANGES);
         }
         //Get general statistic
         Logger.setReport(MARKER_2+GENERAL_STATISTIC);
         result = compareStatisticBySource(report,reference,GENERAL_STATISTIC);
         if (result==0){
-            Logger.setReport(NO_CHANGES+"\n");
+            Logger.setReport(NO_CHANGES);
         }
         //Get statistic by categories
         Logger.setReport(MARKER_2+BY_CATEGORIES);
         result = compareStatisticBySource(report,reference,STATISTIC_BY_CATEGORIES);
         if (result==0){
-            Logger.setReport(NO_CHANGES+"\n");
+            Logger.setReport(NO_CHANGES);
         }
         else {
             result=compareStatisticBySource(report,reference,GET_OBJECTS);
             if (result==0){
-                Logger.setReport("\n"+NO_DIFFERENCE_OBJECT_STATUS);
-                Logger.setReport("\n"+MANUAL_ANALYS_NECESSARY);
+                Logger.setReport(NO_DIFFERENCE_OBJECT_STATUS);
+                Logger.setReport(MANUAL_ANALYS_NECESSARY);
             }
         }
     }//compareApplyReports
@@ -71,19 +70,19 @@ public class CSV_Compare {
         Logger.setReport(MARKER_2+GENERAL_STATISTIC);
         result = compareStatisticBySource(report,reference,GENERAL_STATISTIC);
         if (result==0){
-            Logger.setReport(NO_CHANGES+"\n");
+            Logger.setReport(NO_CHANGES);
         }
 
         Logger.setReport(MARKER_2+BY_CATEGORIES);
         result = compareStatisticBySource(report,reference,STATISTIC_BY_CATEGORIES);
         if (result==0){
-            Logger.setReport(NO_CHANGES+"\n");
+            Logger.setReport(NO_CHANGES);
         }
         else {
             result=compareStatisticBySource(report,reference,GET_OBJECTS);
             if (result==0){
-                Logger.setReport("\n"+NO_DIFFERENCE_OBJECT_STATUS);
-                Logger.setReport("\n"+MANUAL_ANALYS_NECESSARY);
+                Logger.setReport(NO_DIFFERENCE_OBJECT_STATUS);
+                Logger.setReport(MANUAL_ANALYS_NECESSARY);
             }
         }
     }//compareConversionReports
@@ -94,13 +93,13 @@ public class CSV_Compare {
         Logger.setReport(MARKER_2+BY_CATEGORIES);
         result = compareStatisticBySource(report,reference,STATISTIC_BY_CATEGORIES);
         if (result==0){
-            Logger.setReport(NO_CHANGES+"\n");
+            Logger.setReport(NO_CHANGES);
         }
         else {
             result=compareStatisticBySource(report,reference,GET_OBJECTS);
             if (result==0){
-                Logger.setReport("\n"+NO_DIFFERENCE_OBJECT_STATUS);
-                Logger.setReport("\n"+MANUAL_ANALYS_NECESSARY);
+                Logger.setReport(NO_DIFFERENCE_OBJECT_STATUS);
+                Logger.setReport(MANUAL_ANALYS_NECESSARY);
             }
         }
     }//compareErrorReports
@@ -111,13 +110,13 @@ public class CSV_Compare {
         Logger.setReport(MARKER_2+GENERAL_STATISTIC);
         result = compareStatisticBySource(report,reference,GENERAL_STATISTIC);
         if (result==0){
-            Logger.setReport(NO_CHANGES+"\n");
+            Logger.setReport(NO_CHANGES);
         }
         else {
             result=compareStatisticBySource(report,reference,GET_OBJECTS);
             if (result==0){
-                Logger.setReport("\n"+NO_DIFFERENCE_OBJECT_STATUS);
-                Logger.setReport("\n"+MANUAL_ANALYS_NECESSARY);
+                Logger.setReport(NO_DIFFERENCE_OBJECT_STATUS);
+                Logger.setReport(MANUAL_ANALYS_NECESSARY);
             }
         }
     }//compareAIReports
@@ -128,7 +127,7 @@ public class CSV_Compare {
         ArrayList<String> report = new ArrayList<String>(ReportReader.readFile(reportFile));
         ArrayList<String> reference = new ArrayList<String>(ReportReader.readFile(referenceFile));
 
-        Logger.setReport(MARKER+reportFile.getName()+"\n");
+        Logger.setReport(MARKER+reportFile.getName());
 
         if (report.stream().anyMatch((p)->p.trim().equalsIgnoreCase(APPLY))){
              compareApplyReports(report,reference);
@@ -146,7 +145,7 @@ public class CSV_Compare {
             compareAIReports(report,reference);
         }
         else {
-            Logger.setReport(COULD_NOT_IDENTIFY_REPORT_TYPE+"\n");
+            Logger.setReport(COULD_NOT_IDENTIFY_REPORT_TYPE);
         }
     }//csvCompare
 
