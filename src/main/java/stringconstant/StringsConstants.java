@@ -10,6 +10,7 @@ public class StringsConstants {
     public static final String COMA = ",";
     public static final String REPORT_CSV ="Report.csv";
     public static final String ONLY_NUMBERS = "^[1-9]+$";
+    public static final String TEMP ="temp";
 
     public static final String APPLY = "APPLY VERIFICATION FILE";
     public static final String CONVERSION = "CONVERSION VERIFICATION FILE";
@@ -17,6 +18,8 @@ public class StringsConstants {
     public static final String ACTION_ITEMS = "ACTION ITEMS VERIFICATION FILE";
     public static final String ERROR ="ERROR VERIFICATION FILE";
     public static final String DATE_FORMAT = "y-M-d";
+    public static final String DATE_FORMAT_REPORT = "YMD";
+    public static final String TIME_FORMAT_REPORT = "HHmmss";
     public static final String TIME_FORMAT = "HH:mm:ss";
 
     public static final String CSV =".csv";

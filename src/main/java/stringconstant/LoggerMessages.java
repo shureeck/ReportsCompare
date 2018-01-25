@@ -16,6 +16,7 @@ public class LoggerMessages {
    public static final String LINE_READ_SUCCESSFULLY = DONE + "Line was successfully read";
    public static final String NO_NUMBERS = "The inputted data is not a number!";
    public static final String MUST_INPUT_NUMBERS = "You must input a number or do not enter anything.";
-
-
+   public static final String REPORT_FILE_WAS_COPIED_INTO = DONE + "Old report file was copied into: ";
+   public static final String REPORT_FILE_WAS_DELETED = DONE + "Old report file was deleted";
+   public static final String IMPOSSIBLE_COPY_FILE = ERROR + "Impossible coppy report file into: ";
 }

@@ -9,9 +9,9 @@ import static stringconstant.StringsConstants.*;
  */
 public class ReportCompare {
     public void reportCompare(){
+        ReportCopy.createFileCopy(new File(REPORT_CSV));
 
-
-
+        //Input data
         String referencePath = Input.input(PREVIOUS_REPORTS_PATH);
         String reportsPath = Input.input(CURRENT_REPORTS_PATH);
         int numberFailed = Input.inputNumber(NUMBER_FEILED_OBJECTS);
