@@ -2,6 +2,7 @@ import java.io.File;
 import java.util.ArrayList;
 
 import static stringconstant.ReportMessages.*;
+import static stringconstant.StringsConstants.*;
 
 /**
  * Created by Poliakov.A on 1/24/2018.
@@ -10,9 +11,10 @@ public class ReportCompare {
     public void reportCompare(){
 
 
-        String reportsPath="e:\\AutoTests\\Reports\\DEV3532\\reports\\";
-        String referencePath="e:\\AutoTests\\Reports\\Main2211\\reports\\";
-        int numberFailed = 5;
+
+        String referencePath = Input.input(PREVIOUS_REPORTS_PATH);
+        String reportsPath = Input.input(CURRENT_REPORTS_PATH);
+        int numberFailed = Input.inputNumber(NUMBER_FEILED_OBJECTS);
 
         ArrayList <File> reportsList = new ArrayList<>(ReportsList.getReportsList(new File(reportsPath)));
         ArrayList <File> referenceList = new ArrayList<>(ReportsList.getReportsList(new File(referencePath)));

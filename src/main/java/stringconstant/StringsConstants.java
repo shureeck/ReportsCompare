@@ -9,6 +9,7 @@ public class StringsConstants {
     public static final String COLON = ": ";
     public static final String COMA = ",";
     public static final String REPORT_CSV ="Report.csv";
+    public static final String ONLY_NUMBERS = "^[1-9]+$";
 
     public static final String APPLY = "APPLY VERIFICATION FILE";
     public static final String CONVERSION = "CONVERSION VERIFICATION FILE";
@@ -26,6 +27,11 @@ public class StringsConstants {
     public static final String GET_OBJECTS ="Test,Object type,Object name, Description,Status,Report";
 
     public static final String BUILD_NUMBER = "^Build Number:.*$";
+
+    public static final String PREVIOUS_REPORTS_PATH = "Input path of previous reports:";
+    public static final String CURRENT_REPORTS_PATH = "Input path of current reports:";
+    public static final String NUMBER_FEILED_OBJECTS = "Input the number of failed objects displayed in report[5]:";
+
 
 
 }

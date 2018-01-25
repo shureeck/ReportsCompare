@@ -48,7 +48,7 @@ public class CSV_Compare {
     private int compareReport(ArrayList<String> report, ArrayList<String>reference, int numberFailedObjects){
         int i=0;
         int count =0;
-        while (report.size()>i && count<=numberFailedObjects){
+        while (report.size()>i && count<numberFailedObjects){
             String temp = report.get(i);
             if (reference.stream().noneMatch((p)->p.equalsIgnoreCase(temp)))
             {

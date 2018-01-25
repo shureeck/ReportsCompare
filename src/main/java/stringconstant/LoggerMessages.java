@@ -14,6 +14,8 @@ public class LoggerMessages {
    public static final String COULD_NOT_READ_LINE = ERROR + "Could not read line";
    public static final String STRING_EMPTY = ERROR + "String is emprty!";
    public static final String LINE_READ_SUCCESSFULLY = DONE + "Line was successfully read";
+   public static final String NO_NUMBERS = "The inputted data is not a number!";
+   public static final String MUST_INPUT_NUMBERS = "You must input a number or do not enter anything.";
 
 
 }
