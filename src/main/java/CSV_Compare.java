@@ -48,16 +48,19 @@ public class CSV_Compare {
     private int compareReport(ArrayList<String> report, ArrayList<String>reference, int numberFailedObjects){
         int i=0;
         int count =0;
-        while (report.size()>i && count<numberFailedObjects){
+        while (report.size()>i){
             String temp = report.get(i);
             if (reference.stream().noneMatch((p)->p.equalsIgnoreCase(temp)))
             {
+                if (count<numberFailedObjects){
                 //will be changed to report or buffer
                 Logger.setReport(report.get(i));
+                }
                 count++;
             }
             i++;
         }
+        Logger.setReport("\n"+SEVERAL_TAB+count + OBJECTS_ARE_DIFFER);
         return count;
     }//compareReport
 
