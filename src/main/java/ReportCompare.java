@@ -35,6 +35,7 @@ public class ReportCompare {
         Logger.setReport(CURRENT_BUILD+buildNumber+"\n");
 
         //Report compare
+        Report compareReport = new Report();
         CSV_Compare csv_compare = new CSV_Compare();
 
         while(reportsList.size()!=0) {
@@ -51,8 +52,8 @@ public class ReportCompare {
                 File referenceFile = referenceList.stream().filter((p) -> p.getPath().endsWith(path)).findFirst().orElse(null);
                 File reportFile = reportsByPair.get(i);
 
-                if (referenceFile!=null &&reportFile!=null) {
-                    csv_compare.csvCompare(reportFile, referenceFile, numberFailed);
+                if (referenceFile!=null && reportFile!=null) {
+                    compareReport.addALL(csv_compare.csvCompare(reportFile, referenceFile, numberFailed));
                     referenceList.removeIf((p) -> p.getPath().endsWith(path));
                 }
                 else {
