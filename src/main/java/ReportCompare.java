@@ -61,6 +61,10 @@ public class ReportCompare {
                 }
                 i++;
             }
+            compareReport.getApply().stream().forEach((p)->Logger.setReport(p));
+            compareReport.getConvert().stream().forEach((p)->Logger.setReport(p));
+            compareReport.getError().stream().forEach((p)->Logger.setReport(p));
+            compareReport.getAI().stream().forEach((p)->Logger.setReport(p));
             Logger.setReport(SEPARATOR);
         }//while
 
