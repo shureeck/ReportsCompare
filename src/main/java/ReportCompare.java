@@ -46,7 +46,7 @@ public class ReportCompare {
             i = 0;
             while (i < reportsByPair.size()) {
                 //Get common part of path for reference ane report
-                String path = reportsByPair.get(i).getPath().substring(referencePath.length());
+                String path = reportsByPair.get(i).getPath().substring(reportsPath.length());
 
                 //Get report and reference files
                 File referenceFile = referenceList.stream().filter((p) -> p.getPath().endsWith(path)).findFirst().orElse(null);
@@ -65,6 +65,7 @@ public class ReportCompare {
             compareReport.getConvert().stream().forEach((p)->Logger.setReport(p));
             compareReport.getError().stream().forEach((p)->Logger.setReport(p));
             compareReport.getAI().stream().forEach((p)->Logger.setReport(p));
+
             Logger.setReport(SEPARATOR);
         }//while
 

@@ -24,15 +24,11 @@ public class CSV_Compare {
     private ArrayList<String> compareReport(ArrayList<String> report, ArrayList<String>reference){
         ArrayList<String> failedString=new ArrayList<>();
         int i=0;
-       // int count =0;
         while (report.size()>i){
             String temp = report.get(i);
             if (reference.stream().noneMatch((p)->p.equalsIgnoreCase(temp)))
             {
-               //will be changed to report or buffer
                 failedString.add(report.get(i));
-                //Logger.setReport(report.get(i));
-                //count++;
             }
             i++;
         }
@@ -57,17 +53,13 @@ public class CSV_Compare {
             String temp = report.get(i);
             if (reference.stream().noneMatch((p)->p.equalsIgnoreCase(temp)))
             {
-                if (count<numberFailedObjects){
-                    //will be changed to report or buffer
+                if (count<numberFailedObjects && numberFailedObjects!=0){
                     failedString.add(report.get(i));
-                    //Logger.setReport(report.get(i));
-                    //count++;
                 }
                 count++;
             }
             i++;
         }
-        //Logger.setReport("\n"+SEVERAL_TAB+count + OBJECTS_ARE_DIFFER);
         failedString.add("\n"+SEVERAL_TAB+count + OBJECTS_ARE_DIFFER);
         return failedString;
     }//compareReport
@@ -75,43 +67,36 @@ public class CSV_Compare {
     public ArrayList<String> compareApplyReports (ArrayList<String> report, ArrayList<String> reference, int numberFailed){
         ArrayList<String> reportStrings=new ArrayList<>();
         ArrayList<String> result=new ArrayList<>();
-        //Get statistic by source
-      //  Logger.setReport(MARKER_2+STATISTIC_BY_SOURCE_XML);
-        reportStrings.add(MARKER_2+STATISTIC_BY_SOURCE_XML);
+
         result.addAll(compareStatisticBySource(report,reference,STATISTIC_BY_SOURCE_XML));
         if (result.size()==0){
-          //  Logger.setReport(NO_CHANGES);
-            reportStrings.add(NO_CHANGES);
+            reportStrings.add(MARKER_2+STATISTIC_BY_SOURCE_XML+NO_CHANGES);
         }
         else
         {
+            reportStrings.add(MARKER_2+STATISTIC_BY_SOURCE_XML);
             reportStrings.addAll(result);
         }
 
-        //Get general statistic
-     ///   Logger.setReport(MARKER_2+GENERAL_STATISTIC);
-        reportStrings.add(MARKER_2+GENERAL_STATISTIC);
         result.clear();
         result.addAll(compareStatisticBySource(report,reference,GENERAL_STATISTIC));
         if (result.size()==0){
-            //Logger.setReport(NO_CHANGES);
-            reportStrings.add(NO_CHANGES);
+            reportStrings.add(MARKER_2+GENERAL_STATISTIC+NO_CHANGES);
         }
         else{
+            reportStrings.add(MARKER_2+GENERAL_STATISTIC);
             reportStrings.addAll(result);
         }
 
-        //Get statistic by categories
-       // Logger.setReport(MARKER_2+BY_CATEGORIES);
-        reportStrings.add(MARKER_2+BY_CATEGORIES);
         result.clear();
         result.addAll(compareStatisticBySource(report,reference,STATISTIC_BY_CATEGORIES));
         if (result.size()==0){
-            //Logger.setReport(NO_CHANGES);
-            reportStrings.add(NO_CHANGES);
+            reportStrings.add(MARKER_2+BY_CATEGORIES+NO_CHANGES);
         }
         else {
+            reportStrings.add(MARKER_2+BY_CATEGORIES);
             reportStrings.addAll(result);
+
             result.clear();
             result.addAll(compareStatisticBySource(report,reference,GET_OBJECTS,numberFailed));
             if (result.size()==0){
@@ -129,30 +114,25 @@ public class CSV_Compare {
         ArrayList<String> reportStrings=new ArrayList<>();
         ArrayList<String> result=new ArrayList<>();
 
-        //Get general statistic
-        ///   Logger.setReport(MARKER_2+GENERAL_STATISTIC);
-        reportStrings.add(MARKER_2+GENERAL_STATISTIC);
         result.clear();
         result.addAll(compareStatisticBySource(report,reference,GENERAL_STATISTIC));
         if (result.size()==0){
-            //Logger.setReport(NO_CHANGES);
-            reportStrings.add(NO_CHANGES);
+            reportStrings.add(MARKER_2+GENERAL_STATISTIC+NO_CHANGES);
         }
         else{
+            reportStrings.add(MARKER_2+GENERAL_STATISTIC);
             reportStrings.addAll(result);
         }
 
-        //Get statistic by categories
-        // Logger.setReport(MARKER_2+BY_CATEGORIES);
-        reportStrings.add(MARKER_2+BY_CATEGORIES);
         result.clear();
         result.addAll(compareStatisticBySource(report,reference,STATISTIC_BY_CATEGORIES));
         if (result.size()==0){
-            //Logger.setReport(NO_CHANGES);
-            reportStrings.add(NO_CHANGES);
+            reportStrings.add(MARKER_2+BY_CATEGORIES+NO_CHANGES);
         }
         else {
+            reportStrings.add(MARKER_2+BY_CATEGORIES);
             reportStrings.addAll(result);
+
             result.clear();
             result.addAll(compareStatisticBySource(report,reference,GET_OBJECTS,numberFailed));
             if (result.size()==0){
@@ -169,17 +149,16 @@ public class CSV_Compare {
     public ArrayList<String> compareErrorReports (ArrayList<String> report, ArrayList<String> reference, int numberFailed){
         ArrayList<String> reportStrings=new ArrayList<>();
         ArrayList<String> result=new ArrayList<>();
-        //Get statistic by categories
-        // Logger.setReport(MARKER_2+BY_CATEGORIES);
-        reportStrings.add(MARKER_2+BY_CATEGORIES);
+
         result.clear();
         result.addAll(compareStatisticBySource(report,reference,STATISTIC_BY_CATEGORIES));
         if (result.size()==0){
-            //Logger.setReport(NO_CHANGES);
-            reportStrings.add(NO_CHANGES);
+            reportStrings.add(MARKER_2+BY_CATEGORIES+NO_CHANGES);
         }
         else {
+            reportStrings.add(MARKER_2+BY_CATEGORIES);
             reportStrings.addAll(result);
+
             result.clear();
             result.addAll(compareStatisticBySource(report,reference,GET_OBJECTS,numberFailed));
             if (result.size()==0){
@@ -197,15 +176,16 @@ public class CSV_Compare {
         ArrayList<String> reportStrings=new ArrayList<>();
         ArrayList<String> result=new ArrayList<>();
 //Get general statistic;
-        reportStrings.add(MARKER_2+GENERAL_STATISTIC);
+
         result.clear();
         result.addAll(compareStatisticBySource(report,reference,GENERAL_STATISTIC));
         if (result.size()==0){
-            //Logger.setReport(NO_CHANGES);
-            reportStrings.add(NO_CHANGES);
+            reportStrings.add(MARKER_2+GENERAL_STATISTIC+NO_CHANGES);
         }
         else {
+            reportStrings.add(MARKER_2+GENERAL_STATISTIC);
             reportStrings.addAll(result);
+
             result.clear();
             result.addAll(compareStatisticBySource(report,reference,GET_OBJECTS,numberFailed));
             if (result.size()==0){
@@ -226,8 +206,6 @@ public class CSV_Compare {
 
         ArrayList<String> report = new ArrayList<String>(ReportReader.readFile(reportFile));
         ArrayList<String> reference = new ArrayList<String>(ReportReader.readFile(referenceFile));
-
-       // Logger.setReport(MARKER+reportFile.getName());
 
         if (report.stream().anyMatch((p)->p.trim().equalsIgnoreCase(APPLY))){
             reportByTypes.add(MARKER+reportFile.getName());
