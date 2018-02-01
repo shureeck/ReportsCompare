@@ -67,6 +67,7 @@ public class ReportCompare {
             compareReport.getAI().stream().forEach((p)->Logger.setReport(p));
 
             Logger.setReport(SEPARATOR);
+            compareReport.clearALL();
         }//while
 
     }
