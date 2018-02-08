@@ -54,7 +54,8 @@ public class CSV_Compare {
             if (reference.stream().noneMatch((p)->p.equalsIgnoreCase(temp)))
             {
                 if (count<numberFailedObjects && numberFailedObjects!=0){
-                    failedString.add(report.get(i));
+
+                    failedString.add(report.get(i).substring(0,130)+THREE_DOTS);
                 }
                 count++;
             }

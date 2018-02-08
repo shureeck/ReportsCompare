@@ -7,6 +7,7 @@ public class StringsConstants {
     public static final String REPORT_COMPARE = "ReportCompare_";
     public static final String LOG = ".log";
     public static final String COLON = ": ";
+    public static final String THREE_DOTS = "...";
     public static final String COMA = ",";
     public static final String REPORT_CSV ="Report.csv";
     public static final String ONLY_NUMBERS = "^[0-9]*$";
