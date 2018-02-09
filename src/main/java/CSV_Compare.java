@@ -55,7 +55,11 @@ public class CSV_Compare {
             {
                 if (count<numberFailedObjects && numberFailedObjects!=0){
 
+                    if (report.get(i).length()>130)
                     failedString.add(report.get(i).substring(0,130)+THREE_DOTS);
+
+                    else
+                        failedString.add(report.get(i));
                 }
                 count++;
             }
