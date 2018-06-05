@@ -25,6 +25,7 @@ public class ReportCompare {
         while(i<referenceList.size()) {
             buildNumber = ReportParser.getBuildNumber(referenceList.get(i));
             if (buildNumber!=null) break;
+            i++;
         }
         Logger.setReport(REFERENCE_BUILD+buildNumber);
 
