@@ -22,6 +22,7 @@ public class StringsConstants {
     public static final String DATE_FORMAT_REPORT = "YMD";
     public static final String TIME_FORMAT_REPORT = "HHmmss";
     public static final String TIME_FORMAT = "HH:mm:ss";
+    public static final String PREVIOUS_CURRENT = "Previous report, Current report,";
 
     public static final String CSV =".csv";
     public static final String STATISTIC_BY_SOURCE_XML = "Statistic by source.xml";
