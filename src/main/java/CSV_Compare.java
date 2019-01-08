@@ -27,22 +27,26 @@ public class CSV_Compare {
     }
 
     private String getObjectFromReport(String object, ArrayList<String> report) {
-        String objectTypeName = object.split(COMA)[1] + COMA + object.split(COMA)[2];
-        String result = report.stream().filter((p) -> (p.contains(objectTypeName))).findFirst().orElse("null");
+        String[] splitedobject = object.split(COMA);
+        String result = "null";
 
+        if (splitedobject.length > 3) {
+            String objectTypeName = splitedobject[1] + COMA + splitedobject[2];
+            result = report.stream().filter((p) -> (p.contains(objectTypeName))).findFirst().orElse("null");
+        }
         if (result.length() > 130) return result.substring(0, 130) + THREE_DOTS;
         else return result;
     }
 
     private ArrayList<String> compareReport(ArrayList<String> report, ArrayList<String> reference) {
         ArrayList<String> failedString = new ArrayList<>();
-        failedString.add(COMA+PREVIOUS_CURRENT);
+        failedString.add(COMA + PREVIOUS_CURRENT);
         int i = 0;
         while (report.size() > i) {
             String temp = report.get(i);
             if (reference.stream().noneMatch((p) -> p.equalsIgnoreCase(temp))) {
                 String referenceValue = getItemFromReport(temp, reference);
-                failedString.add(COMA+"\"" + referenceValue + "\"" + COMA + "\"" + report.get(i) + "\"" + COMA);
+                failedString.add(COMA + "\"" + referenceValue + "\"" + COMA + "\"" + report.get(i) + "\"" + COMA);
             }
             i++;
         }
@@ -62,7 +66,7 @@ public class CSV_Compare {
 
     private ArrayList<String> compareReport(ArrayList<String> report, ArrayList<String> reference, int numberFailedObjects) {
         ArrayList<String> failedString = new ArrayList<>();
-        failedString.add(COMA+PREVIOUS_CURRENT);
+        failedString.add(COMA + PREVIOUS_CURRENT);
         int i = 0;
         int count = 0;
         while (report.size() > i) {
@@ -73,10 +77,10 @@ public class CSV_Compare {
                     String previousResult = getObjectFromReport(report.get(i), reference);
 
                     if (report.get(i).length() > 130)
-                        failedString.add(COMA+"\"" + previousResult + "\"" + COMA + "\"" +
+                        failedString.add(COMA + "\"" + previousResult + "\"" + COMA + "\"" +
                                 report.get(i).substring(0, 130) + THREE_DOTS + "\"" + COMA);
                     else
-                        failedString.add(COMA+"\"" + previousResult + "\"" + COMA + "\"" + report.get(i) + "\"" + COMA);
+                        failedString.add(COMA + "\"" + previousResult + "\"" + COMA + "\"" + report.get(i) + "\"" + COMA);
                 }
                 count++;
             }
