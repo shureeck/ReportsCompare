@@ -29,7 +29,7 @@ public class StringsConstants {
     public static final String GENERAL_STATISTIC = "General statistic";
     public static final String STATISTIC_BY_CATEGORIES = "Type,Passed,Failed";
     public static final String BY_CATEGORIES = "Statistic by categories";
-    public static final String GET_OBJECTS ="Test,Object type,Object name, Description,Status,Report";
+    public static final String GET_OBJECTS ="Test,Object type,Object name,Description,Status,Report";
 
     public static final String BUILD_NUMBER = "^Build Number:.*$";
 

@@ -36,13 +36,13 @@ public class CSV_Compare {
 
     private ArrayList<String> compareReport(ArrayList<String> report, ArrayList<String> reference) {
         ArrayList<String> failedString = new ArrayList<>();
-        failedString.add(PREVIOUS_CURRENT);
+        failedString.add(COMA+PREVIOUS_CURRENT);
         int i = 0;
         while (report.size() > i) {
             String temp = report.get(i);
             if (reference.stream().noneMatch((p) -> p.equalsIgnoreCase(temp))) {
                 String referenceValue = getItemFromReport(temp, reference);
-                failedString.add("\"" + referenceValue + "\"" + COMA + "\"" + report.get(i) + "\"" + COMA);
+                failedString.add(COMA+"\"" + referenceValue + "\"" + COMA + "\"" + report.get(i) + "\"" + COMA);
             }
             i++;
         }
@@ -62,7 +62,7 @@ public class CSV_Compare {
 
     private ArrayList<String> compareReport(ArrayList<String> report, ArrayList<String> reference, int numberFailedObjects) {
         ArrayList<String> failedString = new ArrayList<>();
-        failedString.add(PREVIOUS_CURRENT);
+        failedString.add(COMA+PREVIOUS_CURRENT);
         int i = 0;
         int count = 0;
         while (report.size() > i) {
@@ -73,10 +73,10 @@ public class CSV_Compare {
                     String previousResult = getObjectFromReport(report.get(i), reference);
 
                     if (report.get(i).length() > 130)
-                        failedString.add("\"" + previousResult + "\"" + COMA + "\"" +
+                        failedString.add(COMA+"\"" + previousResult + "\"" + COMA + "\"" +
                                 report.get(i).substring(0, 130) + THREE_DOTS + "\"" + COMA);
                     else
-                        failedString.add("\"" + previousResult + "\"" + COMA + "\"" + report.get(i) + "\"" + COMA);
+                        failedString.add(COMA+"\"" + previousResult + "\"" + COMA + "\"" + report.get(i) + "\"" + COMA);
                 }
                 count++;
             }
